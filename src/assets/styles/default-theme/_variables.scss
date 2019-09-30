@@ -1,0 +1,71 @@
+
+/**************** RESPONSIVE *********************/
+
+
+/*
+*   minxs       : menor a xs
+*   maxxs       : xs a sm
+*   xs          : menor a sm
+*   xsland      : landscape 320px a mobile-landscape
+*   sm          : sm a md
+*   md          : md a lg
+*   mdland      : landscape sm a tablet-landscape
+*   lg          : mayor a lg
+*   non-retina  : no retina
+*   retina      : retina
+*   num         : menor a cualquier numero que se ponga -> @include respond-to(1600){}
+*/
+
+$xs: 576px;
+$sm: 768px;
+$md: 992px;
+$lg: 1200px;
+$mobile-landscape: 480px;
+$tablet-landscape: 1024px;
+
+/**************** /RESPONSIVE *********************/
+
+
+
+/*** Dark theme Material Design ***/
+
+$dark-status-bar: #000000;
+$dark-app-bar: #212121;
+$dark-background: #303030;
+$dark-cards-dialogs: #424242;
+
+$dark-primary-text: rgba(255, 255, 255, 1.00);
+$dark-secundary-text: rgba(255, 255, 255, 0.70);
+$dark-disabled-text: rgba(255, 255, 255, 0.50);
+$dark-divider-text: rgba(255, 255, 255, 0.12);
+
+$dark-divider: rgba(255, 255, 255, 0.38);
+$dark-icon-active: rgba(0, 0, 0, 0.54);
+$dark-icon-inactive: rgba(0, 0, 0, 0.38);
+
+/*** /Dark theme Material Design ***/
+
+/****** Light theme Material Design ******/
+
+$light-status-bar       : #e0e0e0;
+$light-app-bar          : #f5f5f5;
+$light-background       : #fafafa;
+$light-cards-dialogs    : #ffffff;
+
+$light-primary-text     : rgba(0, 0, 0, 0.87);
+$light-secundary-text   : rgba(0, 0, 0, 0.54);
+$light-disabled-text    : rgba(0, 0, 0, 0.38);
+$light-divider-text     : rgba(0, 0, 0, 0.12);
+
+$light-divider          : rgba(0, 0, 0, 0.38);
+$light-icon-active      : rgba(255, 255, 255, 1.00);
+$light-icon-inactive    : rgba(255, 255, 255, 0.50);
+
+/****** /Light theme Material Design ******/
+
+
+
+
+/********* new variables weblibrary ***********/
+
+$font-Roboto: 'Roboto', sans-serif;

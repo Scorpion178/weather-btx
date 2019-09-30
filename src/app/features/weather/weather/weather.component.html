@@ -1,0 +1,94 @@
+<nz-layout>
+    <nz-header>
+      <div class="logo">
+        <img src="assets/images/logo-belatrix.png" alt="Logo Belatrix">
+      </div>
+    </nz-header>
+    <nz-content>
+      <nz-breadcrumb>
+        <nz-breadcrumb-item>Home</nz-breadcrumb-item>
+        <nz-breadcrumb-item>App Weather</nz-breadcrumb-item>
+      </nz-breadcrumb>
+      <div class="inner-content">
+        <div class="weather-input">
+            <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixIconButton">
+              <input 
+                  placeholder="El tiempo en ..." 
+                  nz-input [(ngModel)]="inputValue" 
+                  (input)="onInput($event.target?.value)"
+                  (keyup.enter)="searchInput()" 
+                  [nzAutocomplete]="auto" />
+            </nz-input-group>
+            <ng-template #suffixIconButton>
+              <button (click)="searchInput()" nz-button nzType="primary" nzSize="large" nzSearch>
+                <i nz-icon nzType="search" nzTheme="outline"></i>
+              </button>
+            </ng-template>
+            <nz-autocomplete #auto>
+              <nz-auto-option *ngFor="let option of filteredOptions" [nzValue]="option.name" (click)="search(option.city)">{{option.name}}
+              </nz-auto-option>
+            </nz-autocomplete>
+        </div>
+
+        <div class="container-weather">
+            <div *ngIf="activeloadingfull; then spiner else usertable" class="doc-loadtable"></div>
+            <ng-template #spiner>
+                <div class="content-spiner">
+                    <nz-spin nzSimple></nz-spin>
+                </div>
+            </ng-template>
+            <ng-template #usertable>
+                <div *ngIf="printWeather" class="content-weather">
+                    <div class="weather-head">
+                        <h1>{{ printWeather.city }}</h1>
+                        <p>{{ printWeather.localtime | date:'EEEE, h:mm a'}}</p>
+                        <p>{{ printWeather.condition}}</p>
+                    </div>
+                    <div class="weather-body">
+                        <div class="content-left">
+                            <img [src]="printWeather.icon" alt="icono del clima actual">
+                            <div class="container-temp">
+                                <span *ngIf="temp == 'c'">{{ printWeather.temp_c}}</span>
+                                <span *ngIf="temp == 'f'">{{ printWeather.temp_f}}</span>
+                                <div class="content-temp">
+                                    <div class="btn-temp" (click)="temp= 'c'" [ngClass]="{'select-temp':temp === 'c'}">°C</div>
+                                    <div class="btn-temp" (click)="temp= 'f'" [ngClass]="{'select-temp':temp === 'f'}">°F</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-right">
+                            <p>Prob. de precipitaciones: {{ printWeather.precip}}%</p>
+                            <p>Humedad: {{ printWeather.humidity}}%</p>
+                            <p>Viento: a {{ printWeather.wind_kph}} Km/h</p>
+                        </div>
+                    </div>
+                    <div *ngIf="sevenDayWeather" class="weather-footer">
+                        <ul class="list-sevendays">
+                            <li *ngIf="currentWeather.current" (click)="selectDay = 1; setPrintWeather(currentWeather,true)" class="item-weather" [ngClass]="{'item-select':selectDay === 1 }">
+                                <span class="day">{{ currentWeather.location.localtime | date:'EE'}}</span>
+                                <img [src]="currentWeather.current.condition.icon" alt="icono del clima actual">
+                                <div class="temp-max-min">
+                                    <span>{{ currentWeather.current.temp_c}}°</span>
+                                    <span>{{ currentWeather.current.feelslike_c}}°</span>
+                                </div>
+                            </li>
+                            <li *ngFor="let dayweather of sevenDayWeather.forecast.forecastday; let i = index" (click)="selectDay = i+2; setPrintWeather(dayweather)" class="item-weather" [ngClass]="{'item-select':selectDay === i+2 }">
+                                <span class="day">{{ dayweather.date | date:'EE'}}</span>
+                                <img [src]="dayweather.day.condition.icon" alt="icono del clima">
+                                <div class="temp-max-min">
+                                    <span>{{ dayweather.day.maxtemp_c}}°</span>
+                                    <span>{{ dayweather.day.mintemp_c}}°</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+
+
+      </div>
+    </nz-content>
+    <nz-footer>Leo Dev ©2019 Implement By Angular</nz-footer>
+  </nz-layout>
+

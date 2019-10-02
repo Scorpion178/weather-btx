@@ -24,7 +24,7 @@ export class WeatherComponent implements OnInit {
   temp:string = 'c'; // 'f'
   selectDay:number = 1;
 
-  constructor(private _weatherService:WeatherService) {
+  constructor(public _weatherService:WeatherService) {
   }
 
   ngOnInit() {
